@@ -24,7 +24,7 @@ const BalanceRow = ({token}) => {
       <Avatar></Avatar>
       <VStack>
         <Text>Token</Text>
-
+        <Text>{JSON.stringify(token.token)}</Text>
         {/* {isToken(token.token)} */}
       </VStack>
     </HStack>

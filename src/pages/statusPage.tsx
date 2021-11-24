@@ -12,20 +12,39 @@ import {NativeBaseProvider} from 'native-base';
 import {callStatus} from '../api/minima';
 import StatusCard from '../components/statusCard';
 import {Status} from '../Typescript';
+import {useFocusEffect} from '@react-navigation/native';
 
 const StatusPage = () => {
   const [status, setStatus] = useState<Status | null>(null);
 
-  useEffect(() => {
-    callStatus()
-      .then(data => {
-        // alert(JSON.stringify(data));
-        setStatus(data && data.response ? data.response : null);
-      })
-      .catch(err => {
-        // alert(err);
-      });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      callStatus()
+        .then(data => {
+          // alert(JSON.stringify(data));
+          setStatus(data && data.response ? data.response : null);
+        })
+        .catch(err => {
+          // alert(err);
+        });
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, []),
+  );
+  // useEffect(() => {
+  //   callStatus()
+  //     .then(data => {
+  //       // alert(JSON.stringify(data));
+  //       setStatus(data && data.response ? data.response : null);
+  //     })
+  //     .catch(err => {
+  //       // alert(err);
+  //     });
+  // }, []);
 
   return (
     <NativeBaseProvider>

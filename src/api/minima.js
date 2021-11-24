@@ -41,7 +41,7 @@ export const callBalance = () => {
         return result.json();
       })
       .then(data => {
-        resolve(data);
+        resolve(data ? data : []);
 
         //alert(`${JSO N.stringify(data)}`);
       })

@@ -15,6 +15,7 @@ import {
 import {Balance} from '../Typescript';
 import BalanceRow from '../components/balanceRow';
 import {callBalance} from '../api/minima';
+import {useFocusEffect} from '@react-navigation/native';
 
 /**
  * TokenCreation
@@ -30,16 +31,23 @@ import {callBalance} from '../api/minima';
 const BalancePage = () => {
   const [balance, setBalance] = useState<Balance[] | []>([]);
 
-  useEffect(() => {
-    callBalance()
-      .then(data => {
-        alert(data.response);
-        setBalance(data && data.response ? data.response : null);
-      })
-      .catch(err => {
-        alert(err);
-      });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      callBalance()
+        .then(data => {
+          setBalance(data && data.response ? data.response : []);
+        })
+        .catch(err => {
+          // alert(err);
+        });
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, []),
+  );
 
   const allTokens = balance?.map(t => (
     <BalanceRow key={t.tokenid} token={t}></BalanceRow>
@@ -55,12 +63,8 @@ const BalancePage = () => {
           borderRadius="md"
           borderColor="blueGray.100">
           <VStack space="4" divider={<Divider />}>
-            {balance && balance.length > 0 ? (
-              <Text>Exist</Text>
-            ) : (
-              <Text>Empty</Text>
-            )}
             {allTokens}
+            {balance.length === 0 ? <Text>No balance available</Text> : null}
           </VStack>
         </Box>
       </ScrollView>
