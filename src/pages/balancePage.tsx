@@ -1,15 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
-  Alert,
   Box,
   Heading,
-  HStack,
   NativeBaseProvider,
   ScrollView,
-  Stack,
   VStack,
-  Text,
-  Center,
   Divider,
 } from 'native-base';
 import {Balance} from '../Typescript';
@@ -36,6 +31,7 @@ const BalancePage = () => {
       // Do something when the screen is focused
       callBalance()
         .then(data => {
+          alert(JSON.stringify(data.response));
           setBalance(data && data.response ? data.response : []);
         })
         .catch(err => {
@@ -56,7 +52,7 @@ const BalancePage = () => {
   return (
     <NativeBaseProvider>
       <ScrollView>
-        <Heading>All Tokens</Heading>
+        <Heading m="3">All Tokens</Heading>
         <Box
           m="3"
           borderWidth="0.5"
@@ -64,7 +60,6 @@ const BalancePage = () => {
           borderColor="blueGray.100">
           <VStack space="4" divider={<Divider />}>
             {allTokens}
-            {balance.length === 0 ? <Text>No balance available</Text> : null}
           </VStack>
         </Box>
       </ScrollView>

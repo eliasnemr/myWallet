@@ -35,16 +35,6 @@ const StatusPage = () => {
       };
     }, []),
   );
-  // useEffect(() => {
-  //   callStatus()
-  //     .then(data => {
-  //       // alert(JSON.stringify(data));
-  //       setStatus(data && data.response ? data.response : null);
-  //     })
-  //     .catch(err => {
-  //       // alert(err);
-  //     });
-  // }, []);
 
   return (
     <NativeBaseProvider>

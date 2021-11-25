@@ -92,8 +92,8 @@ const Drawer = createDrawerNavigator();
 const Root = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Status" component={StatusPage} />
       <Drawer.Screen name="Balance" component={BalancePage} />
+      <Drawer.Screen name="Status" component={StatusPage} />
       <Drawer.Screen name="Send Tokens" component={SendPage} />
       <Drawer.Screen name="My Address" component={ReceivePage} />
       <Drawer.Screen name="Create Tokens" component={CreateTokenPage} />
@@ -105,14 +105,14 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: '', headerStyle: {backgroundColor: '#001C32'}}}
-        />
-        <Stack.Screen
           options={{headerShown: false}}
           name="root"
           component={Root}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: '', headerStyle: {backgroundColor: '#001C32'}}}
         />
       </Stack.Navigator>
     </NavigationContainer>
