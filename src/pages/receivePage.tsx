@@ -4,8 +4,8 @@ import {Center, NativeBaseProvider, Box, AspectRatio, Image} from 'native-base';
 import {useFocusEffect} from '@react-navigation/core';
 import QRCode from 'react-native-qrcode-svg';
 import {createIconSetFromIcoMoon} from 'react-native-vector-icons';
-import IcoMoonType from '../selection.json';
-const Icon = createIconSetFromIcoMoon(IcoMoonType);
+// import IcoMoonType from '../selection.json';
+// const Icon = createIconSetFromIcoMoon(IcoMoonType);
 
 const ReceivePage = () => {
   let [address, setAddress] = useState('');

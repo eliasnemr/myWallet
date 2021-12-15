@@ -17,7 +17,7 @@ import {
 } from 'native-base';
 import {Balance, SendTokensForm, FormAlertMessage} from '../typescript';
 import {send} from '../api/minima';
-import {FormAlerts} from '../components/forms/helpers';
+// import {FormAlerts} from '../components/forms/helpers';
 
 const dummyData: Balance[] = [
   {
@@ -189,13 +189,13 @@ const SendForm = () => {
           Submit
         </Button>
 
-        <FormAlerts
-          show={show}
-          status={formAlertMessage?.status}
-          header={formAlertMessage?.header}
-          message={formAlertMessage?.message}
-          setShow={setShow}
-        />
+{/*         <FormAlerts */}
+{/*           show={show} */}
+{/*           status={formAlertMessage?.status} */}
+{/*           header={formAlertMessage?.header} */}
+{/*           message={formAlertMessage?.message} */}
+{/*           setShow={setShow} */}
+{/*         /> */}
       </VStack>
     </Box>
   );

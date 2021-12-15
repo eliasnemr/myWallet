@@ -2,7 +2,11 @@
   "name": "projectname",
   "version": "0.0.1",
   "private": true,
-  "rnpm": { "assets": [ "src/resources/fonts" ] },
+  "rnpm": {
+    "assets": [
+      "src/resources/fonts"
+    ]
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
