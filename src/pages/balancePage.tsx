@@ -9,7 +9,7 @@ import {
 } from 'native-base';
 import {Balance} from '../Typescript';
 import BalanceRow from '../components/balanceRow';
-import {callBalance, callBalance2, retryPromise} from '../api/minima';
+import {callBalance} from '../api/minima';
 import {useFocusEffect} from '@react-navigation/native';
 
 /**
@@ -29,7 +29,7 @@ const BalancePage = () => {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      retryPromise(callBalance2, 2)
+      callBalance()
         .then(data => {
           alert(JSON.stringify(data.response));
           setBalance(data && data.response ? data.response : []);
