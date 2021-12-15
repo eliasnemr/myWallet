@@ -111,6 +111,7 @@ const SendForm = () => {
           message: 'It will be received in approximately 20 seconds.',
         });
       } else {
+        console.log('SEND FAILED')
         setShow(true);
         setFormAlertMessage({
           status: 'danger',

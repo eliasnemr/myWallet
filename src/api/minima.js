@@ -1,10 +1,11 @@
-import {STATUS} from '../redux/constants';
-import {BALANCE} from '../redux/constants';
-import {RPCHOST} from '../redux/constants';
-import {HELP} from '../redux/constants';
-
-
-
+import {
+  STATUS,
+  BALANCE,
+  RPCHOST,
+  SEND,
+  HELP,
+  ADDRESS,
+} from '../redux/constants';
 
 
 
@@ -20,14 +21,44 @@ export const callHelp = () => {
     return retryPromise(callHelpSingle, MAX_RETRIES)
 }
 
+export const callAddress = () => {
+    return retryPromise(callAddressSingle, MAX_RETRIES)
+}
 
-
+// send ${address} ${amount} ${tokenid}
+export const send = (data: any) => {
+    return retryPromise(callSendSingle(data), MAX_RETRIES)
+}
 
 
 
 ///// private functions //////
 
 const MAX_RETRIES = 2
+
+
+
+const callSendSingle = (data: any) => () => {
+    const url = `${RPCHOST}${SEND}+address:${data.address}+amount:${data.amount}+tokenid:${data.tokenid}`;
+    return fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(result => result.json())
+}
+
+const callAddressSingle = () => {
+    const url = `${RPCHOST}${ADDRESS}`;
+    return fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(result => result.json())
+}
 
 const callStatusSingle = () => {
     const url = `${RPCHOST}${STATUS}`;

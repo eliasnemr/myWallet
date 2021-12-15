@@ -26,7 +26,7 @@ const StatusPage = () => {
           setStatus(data && data.response ? data.response : null);
         })
         .catch(err => {
-          //alert(err);
+          alert(err);
         });
 
       return () => {

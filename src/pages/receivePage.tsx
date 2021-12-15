@@ -15,11 +15,11 @@ const ReceivePage = () => {
       // Do something when the screen is focused
       callAddress()
         .then(data => {
-          // console.log(data);
+          console.log(data);
           setAddress(data && data.response ? data.response.address : '');
         })
         .catch(err => {
-          // alert(err);
+          alert(err);
         });
 
       return () => {

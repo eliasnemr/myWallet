@@ -66,7 +66,7 @@ const BalancePage = () => {
           }
         })
         .catch(err => {
-          //alert(err);
+          alert(err);
         });
 
       return () => {
