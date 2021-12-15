@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   ScrollView,
@@ -11,7 +11,7 @@ import {
 import {NativeBaseProvider} from 'native-base';
 import {callStatus} from '../api/minima';
 import StatusCard from '../components/statusCard';
-import {Status} from '../Typescript';
+import {Status} from '../typescript';
 import {useFocusEffect} from '@react-navigation/native';
 
 const StatusPage = () => {
@@ -22,11 +22,11 @@ const StatusPage = () => {
       // Do something when the screen is focused
       callStatus()
         .then(data => {
-          // alert(JSON.stringify(data));
+          //alert(JSON.stringify(data));
           setStatus(data && data.response ? data.response : null);
         })
         .catch(err => {
-          // alert(err);
+          //alert(err);
         });
 
       return () => {
@@ -64,19 +64,19 @@ const StatusPage = () => {
           {status ? (
             <Stack space={3} alignItems="center">
               <HStack space={3} alignItems="center">
-                <Center w="110" h="20" bg="blueGray.50">
+                <Center w="110" h="20" bg="white">
                   <Text fontWeight="700" textAlign="center">
-                    Connected Devices
+                    Disk Usage
                   </Text>
-                  {status.devices}
+                  {status.memory.disk}
                 </Center>
-                <Center w="110" h="20" bg="blueGray.50">
+                <Center w="110" h="20" bg="white">
                   <Text fontWeight="700" textAlign="center">
                     Block
                   </Text>
                   {status.chain.block}
                 </Center>
-                <Center w="110" h="20" bg="blueGray.50">
+                <Center w="110" h="20" bg="white">
                   <Text fontWeight="700" textAlign="center">
                     Ram Usage
                   </Text>

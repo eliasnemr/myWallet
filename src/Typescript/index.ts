@@ -1,3 +1,6 @@
+/**
+ * All Minima Objects
+ */
 export interface Status {
   version: string;
   devices: number;
@@ -59,9 +62,22 @@ interface Token {
 }
 
 export interface Balance {
-  token: string | Token;
+  token: any;
   tokenid: string;
   confirmed: string;
   unconfirmed: string;
   total: string;
+}
+/**
+ * All Form Objects
+ */
+export interface SendTokensForm {
+  address: string;
+  tokenid: string;
+  amount: string;
+}
+export interface FormAlertMessage {
+  status: string;
+  header: string;
+  message: string;
 }
