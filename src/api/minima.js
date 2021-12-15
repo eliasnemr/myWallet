@@ -28,6 +28,17 @@ export const callStatus = () => {
   });
 };
 
+export const callStatus2 = () => {
+    const url = `${RPCHOST}${STATUS}`;
+    return fetch(url, {
+      method: 'GET',
+      mode: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(result => result.json())
+}
+
 export const callBalance = () => {
   return new Promise(async (resolve, reject) => {
     const url = `${RPCHOST}${BALANCE}`;
@@ -55,6 +66,17 @@ export const callBalance = () => {
   });
 };
 
+export const callBalance2 = () => {
+    const url = `${RPCHOST}${BALANCE}`;
+      return fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(result => result.json())
+};
+
 export const callHelp = () => {
   return new Promise(async (resolve, reject) => {
     const url = `${RPCHOST}${HELP}`;
@@ -79,3 +101,55 @@ export const callHelp = () => {
       });
   });
 };
+
+
+export const dummy = () => {
+    const url = `http://dummy.restapiexample.com/api/v1/employees`;
+      return fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(result => result.json())
+};
+
+
+
+
+export const dummyS = () => {
+    const url = `https://reqres.in/api/users?page=2`;
+      return fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(result => result.json())
+};
+
+// allows you to call a promise recursively
+// with a max number of attempts (attemptsLeft)
+// will retry until the promise succeeds
+// or until max attempts is reached, in which case it will fail
+export const retryPromise = (myProm, attemptsLeft) => {
+    const newAttemptsLeft = attemptsLeft - 1
+    return new Promise((resolve, reject) => {
+        console.log(`attempt ${attemptsLeft} to call ${myProm.name}`)
+        myProm()
+            .then((successData) => {
+                console.log(`attempt ${attemptsLeft} success`)
+                resolve(successData)
+            }, (failureData) => {
+                console.log(`attempt ${attemptsLeft} failure`)
+                if (newAttemptsLeft < 1) {
+                    reject(failureData)
+                } else {
+                    return retryPromise(myProm, newAttemptsLeft).then(resolve, reject)
+                }
+            })
+    })
+}
+
+
+
