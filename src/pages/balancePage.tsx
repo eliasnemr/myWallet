@@ -7,35 +7,66 @@ import {
   VStack,
   Divider,
 } from 'native-base';
-import {Balance} from '../Typescript';
+import {Balance} from '../typescript';
 import BalanceRow from '../components/balanceRow';
 import {callBalance} from '../api/minima';
 import {useFocusEffect} from '@react-navigation/native';
 
-/**
- * TokenCreation
- * tokencreate:
- * [name:]
- * [amount:]
- * (decimals:)
- * (script:)
- * - Create a token. 'name' can be a JSON Object
- *
- */
+// React components don't re-render unless state changes
+// React useEffect will run once, then change according to the passed state change
+// If you add an empty array then it will change without any dependent state
+
+const data: Balance[] = [
+  {
+    token:
+      'MinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinimaMinima',
+    tokenid: '0x00',
+    unconfirmed: '1000',
+    confirmed: '100000',
+    total: '10000000',
+  },
+  {
+    token: {name: 'J'},
+    tokenid: '0x00000FF',
+    unconfirmed: '1000',
+    confirmed: '100000',
+    total: '10000000',
+  },
+  {
+    token: {name: 'M'},
+    tokenid: '0x000000000FE',
+    unconfirmed: '1000',
+    confirmed: '100000',
+    total: '10000000',
+  },
+  {
+    token: 'Minima',
+    tokenid: '0x00000000000FEFEFE',
+    unconfirmed: '1000',
+    confirmed: '100000',
+    total: '10000000',
+  },
+];
 
 const BalancePage = () => {
-  const [balance, setBalance] = useState<Balance[] | []>([]);
+  const [balance, setBalance] = useState<Balance[]>([]);
 
   useFocusEffect(
     React.useCallback(() => {
+      console.log('Calling Balance...');
       // Do something when the screen is focused
+
+      // setBalance(data);
       callBalance()
         .then(data => {
-          alert(JSON.stringify(data.response));
-          setBalance(data && data.response ? data.response : []);
+          //alert(JSON.stringify(data));
+          if (data && data.response) {
+            console.log('Found balance...');
+            setBalance(data.response);
+          }
         })
         .catch(err => {
-          // alert(err);
+          //alert(err);
         });
 
       return () => {
